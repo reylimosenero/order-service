@@ -38,8 +38,12 @@ public class OrderService {
         payment.setAmount(order.getPrice());
         //rest call
         logger.info("Order-Service Request : "+new ObjectMapper().writeValueAsString(request));
+
+        //registered in API Gateway
 //TODO:        Payment paymentResponse = template.postForObject(ENDPOINT_URL, payment, Payment.class);
-        Payment paymentResponse = template.postForObject("http://localhost:9191/payment/doPayment", payment, Payment.class);
+       // Payment paymentResponse = template.postForObject("http://localhost:9191/payment/doPayment", payment, Payment.class);
+        //registered with eureka
+        Payment paymentResponse = template.postForObject("http://payment-service/payment/doPayment", payment, Payment.class);
         response = paymentResponse.getPaymentStatus().equals("success") ? "payment processing successful and order placed" : "there is a failure in payment api , order added to cart";
         logger.info("Order Service getting Response from Payment-Service : "+new ObjectMapper().writeValueAsString(response));
         repository.save(order);

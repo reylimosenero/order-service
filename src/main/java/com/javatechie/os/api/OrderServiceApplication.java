@@ -14,8 +14,10 @@ public class OrderServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrderServiceApplication.class, args);
 	}
+
+	//loadbalanced is when using service name in the resttemplate call to other rest API
 	 @Bean
-//	 @LoadBalanced
+	 @LoadBalanced
 	public RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
