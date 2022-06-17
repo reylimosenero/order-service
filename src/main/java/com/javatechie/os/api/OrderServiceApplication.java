@@ -15,7 +15,8 @@ public class OrderServiceApplication {
 		SpringApplication.run(OrderServiceApplication.class, args);
 	}
 
-	//loadbalanced is when using service name in the resttemplate call to other rest API
+	//loadbalanced is when using service name in the resttemplate call to other rest API ex.
+	//template.postForObject("http://payment-service/payment/doPayment", payment, Payment.class);
 	 @Bean
 	 @LoadBalanced
 	public RestTemplate restTemplate(){
